@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
             calculateLoan()
         }
 
+        buttonReset.setOnClickListener(){
+            resetInput(buttonReset)
+        }
     }
     private fun calculateLoan(){
         val car_price=editTextCarPrice.text.toString().toInt()
@@ -26,14 +29,19 @@ class MainActivity : AppCompatActivity() {
         val interest=loan*interest_rate*loan_period
         val monthlyRepayment=(loan+interest)/loan_period/12
 
-        textViewCarLoan.text=getString(R.string.loan,loan.toFloat())
-        textViewInterest.text=getString(R.string.interest,interest.toFloat())
-        textViewMonthlyRepayment.text=getString(R.string.montly_repayment,monthlyRepayment.toFloat())
+        Math.round(interest)
+        Math.round(monthlyRepayment)
+        textViewCarLoan.text=getString(R.string.loan)+ ": ${loan}"
+        textViewInterest.text=getString(R.string.interest)+ ": ${interest}"
+        textViewMonthlyRepayment.text=getString(R.string.montly_repayment)+ ": ${monthlyRepayment}"//getString(R.string.montly_repayment,monthlyRepayment.toFloat())
     }
     private fun resetInput(view: View){
-
-        textViewCarLoan.text=" "
-        textViewInterest.text=" "
-        textViewMonthlyRepayment.text=" "
+        editTextCarPrice.text.clear()
+        editTextDownPayment.text.clear()
+        editTextLoanPeriod.text.clear()
+        editTextInterestRate.text.clear()
+        textViewCarLoan.text=getString(R.string.loan)
+        textViewInterest.text=getString(R.string.interest)
+        textViewMonthlyRepayment.text=getString(R.string.montly_repayment)
     }
 }
